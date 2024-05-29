@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>반려동물 커뮤니티</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/mypage.css">
+</head>
+
+<body>
+
+  <header class="header-menu" id="header-menu">
+    <div class="header-menu-wrapper">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">PetTalk</a>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">홈</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">마이페이지</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">게시판</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">마이펫</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">병원찾기</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <button type="button" onclick="window.location.href='/singup';">회원가입</button>
+            <button type="button" onclick="window.location.href='/login';">로그인</button>
+          </form>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="mypage-header">
+    <h2>개인정보수정</h2>
+  </div>
+
+  <div class="mypage-info">
+    <form>
+
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label for="inputPassword6" class="col-form-label">비밀번호</label>
+        </div>
+        <div class="col-auto">
+          <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+        </div>
+        <div class="col-auto">
+          <span id="passwordHelpInline" class="form-text">영문 대소문자/숫자/특수문자 조합 8~16자</span>
+        </div>
+      </div>
+
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label for="inputPassword6" class="col-form-label">비밀번호 확인</label>
+        </div>
+        <div class="col-auto">
+          <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+        </div>
+      </div>
+
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label for="inputname6" class="col-form-label">닉네임</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" id="inputName6" class="form-control" aria-describedby="passwordHelpInline">
+        </div>
+        <div class="col-auto">
+          <span id="nameHelpInline" class="form-text">한글/영문/숫자 1~16자</span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" >수정하기</button>
+    </form>
+  </div>
+
+  <div class="mybtn">
+    <button type="button" class="btn btn-primary" >내 게시글/댓글</button>
+  </div>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+
+</html>
