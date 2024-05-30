@@ -1,0 +1,60 @@
+html {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 25px;
+  line-height: 2em;
+  overflow-x: hidden;
+}
+
+.container-fluid {
+  background-color: rgb(84, 214, 138);
+}
+
+h2 {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 60px;
+  margin-bottom: 80px;
+  color: rgb(84, 214, 138);
+}
+
+.mypet-info {
+  text-align: center;
+}
+
+
+.col-auto,
+.col-md-6 {
+  margin-bottom: 40px;
+}
+
+button.btn-primary {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  background-color: rgb(84, 214, 138);
+}
+
+.addImg {
+  width: 200px; /* 고정된 너비 */
+  height: 150px; /* 고정된 높이 */
+  background-color: lightgray;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0px 10px 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.addImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지가 컨테이너를 채우도록 조정 */
+}
