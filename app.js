@@ -3,6 +3,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const userRouter = require('./routers/user.js')
+const mypageRouter = require('./routers/mypage.js')
+const mypetRouter = require('./routers/mypet.js')
+const clinicRouter = require('./routers/clinic.js')
+const noticeRouter = require('./routers/notice.js')
 const app = express();
 const port = 3005;
 
@@ -34,6 +38,12 @@ app.get('/', (req,res) => {
 })
 
 app.use('/', userRouter); // '/' 경로에 대해 userRouter를 사용
+app.use('/', mypageRouter); // '/' 경로에 대해 mypageRouter를 사용
+app.use('/', mypetRouter); // '/' 경로에 대해 mypetRouter를 사용
+app.use('/', clinicRouter); // '/' 경로에 대해 clinicRouter를 사용
+app.use('/', noticeRouter); // '/' 경로에 대해 noticeRouter를 사용
+
+
 
 
 app.listen(port, () => {

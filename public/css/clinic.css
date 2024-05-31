@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Source Sans Pro', sans-serif; /* 폰트 설정 */
-    font-size: 25px; /* 기본 글자 크기 설정 */
+    font-size: 20px; /* 기본 글자 크기 설정 */
     line-height: 2em; /* 줄 간격 설정 */
     overflow-x: hidden; /* 수평 스크롤을 숨김 */
 }
@@ -34,8 +34,7 @@ h2 {
 }
 
 
-
-.map_wrap, .map_wrap * {margin:0;padding:0;font-size:12px;}
+.map_wrap, .map_wrap * {margin:0;padding:0;font-size:12px }
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:800px;height:800px;}
 #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}

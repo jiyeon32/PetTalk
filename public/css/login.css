@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Source Sans Pro', sans-serif; /* 폰트 설정 */
-    font-size: 25px; /* 기본 글자 크기 설정 */
+    font-size: 23px; /* 기본 글자 크기 설정 */
     line-height: 2em; /* 줄 간격 설정 */
     overflow-x: hidden; /* 수평 스크롤을 숨김 */
 }

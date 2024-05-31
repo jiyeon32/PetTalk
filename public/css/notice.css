@@ -1,0 +1,56 @@
+html {
+    overflow-x: hidden; /* 수평 스크롤을 숨김 */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans Pro', sans-serif; /* 폰트 설정 */
+    font-size: 20x; /* 기본 글자 크기 설정 */
+    line-height: 2em; /* 줄 간격 설정 */
+    overflow-x: hidden; /* 수평 스크롤을 숨김 */
+}
+
+.container-fluid{
+    background-color: rgb(84, 214, 138);
+}
+
+/* 테이블의 가로 길이 줄이기 */
+.table {
+    width: 80%;
+    margin: 0 auto; /* 테이블을 가운데 정렬 */
+}
+
+
+/* 글쓰기 버튼을 오른쪽 정렬 */
+.notice-button {
+    width: 100px; /* 버튼의 너비를 지정 */
+    float: right; /* 버튼을 오른쪽으로 정렬 */
+    margin-right: 20px; /* 페이지 번호와의 간격 조정 */
+    margin-bottom: 20px; /* 테이블과의 간격 조정 */
+    background-color: rgb(84, 214, 138);
+}
+
+/* 페이지 넘기기 번호를 가로 정렬 */
+ul.number {
+    list-style: none; /* 기본 리스트 스타일 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    display: flex; /* 가로 정렬을 위해 flexbox 사용 */
+    justify-content: center; /* 가운데 정렬 */
+    margin-bottom: 20px; /* 글쓰기 버튼과의 간격 조정 */
+}
+
+
+ul.number li {
+    margin: 0 10px; /* 각 페이지 번호 사이에 여백 추가 */
+}
+
+ul.number li a {
+    text-decoration: none; /* 링크 밑줄 제거 */
+    color: #000; /* 링크 색상 */
+}
+
+.button-container {
+    text-align: center;
+}
+
