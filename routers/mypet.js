@@ -4,7 +4,7 @@ const path = require('path');
 const router = express.Router();
 
 router.get('/mypet', function (req, res) {
-    res.render('mypet'); // singup.ejs 파일을 렌더링
+    res.render('pet/mypet'); // singup.ejs 파일을 렌더링
 });
 
 

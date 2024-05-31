@@ -3,12 +3,12 @@ const path = require('path');
 
 const router = express.Router();
 
-router.get('/notice', function (req, res) {
-    res.render('notice'); // notice.ejs 파일을 렌더링
+router.get('/posts', function (req, res) {
+    res.render('post/posts'); // posts.ejs 파일을 렌더링
 });
 
-router.get('/post', function (req, res) {
-    res.render('post'); // post.ejs 파일을 렌더링
+router.get('/new', function (req, res) {
+    res.render('post/new'); // new.ejs 파일을 렌더링
 });
 
 module.exports = router;

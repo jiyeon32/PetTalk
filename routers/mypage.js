@@ -3,8 +3,8 @@ const path = require('path');
 
 const router = express.Router();
 
-router.get('/mypage', function (req, res) {
-    res.render('mypage'); // singup.ejs 파일을 렌더링
+router.get('/profile', function (req, res) {
+    res.render('mypage/profile'); // profile.ejs 파일을 렌더링
 });
 
 
