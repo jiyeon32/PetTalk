@@ -1,0 +1,50 @@
+html {
+    overflow-x: hidden;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    background-color: #f8f9fa;
+  }
+  
+.container {
+    max-width: 600px; /* 가로 길이 조정 */
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 20px; /* 내부 여백 */
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.card-header {
+    text-align: center;
+    font-weight: bold;
+    background-color: rgb(84, 214, 138);
+}
+
+.form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control, .form-select {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+textarea.form-control {
+    resize: none;
+}
+
+button {
+    border-radius: 5px;
+}
+
+.btn-success {
+    background-color: rgb(84, 214, 138);
+}
+

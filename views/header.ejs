@@ -1,0 +1,33 @@
+<header class="header-menu" id="header-menu">
+
+    <div class="header-menu-wrapper">
+    
+                <!-- 내비게이션 바 -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">PetTalk</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item"><a class="nav-link active" href="/">홈</a></li>
+              <li class="nav-item"><a class="nav-link" href="/profile">마이페이지</a></li>
+              <li class="nav-item"><a class="nav-link" href="/posts">게시판</a></li>
+              <li class="nav-item"><a class="nav-link" href="/mypet">마이펫</a></li>
+              <li class="nav-item"><a class="nav-link" href="/clinic">병원찾기</a></li>
+            </ul>
+            <div class="d-flex">
+              <% if (userId) { %>
+                <span class="navbar-text me-3"><%= nickname %>님 환영합니다!</span>
+                <button class="btn btn-outline-danger btn-sm" onclick="window.location.href='/logout';">로그아웃</button>
+              <% } else { %>
+                <button class="btn btn-outline-primary btn-sm me-2" onclick="window.location.href='/register';">회원가입</button>
+                <button class="btn btn-outline-secondary btn-sm" onclick="window.location.href='/login';">로그인</button>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+    </header>

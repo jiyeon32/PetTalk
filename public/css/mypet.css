@@ -1,52 +1,80 @@
 html {
-  overflow-x: hidden; /* 수평 스크롤을 숨김 */
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Source Sans Pro', sans-serif; /* 폰트 설정 */
-  font-size: 20px; /* 기본 글자 크기 설정 */
-  line-height: 2em; /* 줄 간격 설정 */
-  overflow-x: hidden; /* 수평 스크롤을 숨김 */
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
+  background-color: #f8f9fa;
 }
 
-.container-fluid{
+.container-fluid {
   background-color: rgb(84, 214, 138);
 }
 
 h2 {
   text-align: center;
   font-weight: bold;
-  margin-top: 60px;
-  margin-bottom: 80px;
-  color: rgb(84, 214, 138);
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: rgb(84, 214, 138); /* 헤더 색상 */
 }
 
-.mypet-info {
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 카드에 약간의 그림자 추가 */
+  overflow: hidden;
+}
+
+.card-img-top {
+  max-height: 300px;
+  object-fit: cover; /* 이미지 비율 유지하면서 잘라내기 */
+}
+
+.card-body {
+  padding: 15px;
   text-align: center;
 }
 
-
-.col-auto,
-.col-md-6 {
-  margin-bottom: 40px;
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-button.btn-primary {
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 40px;
-  background-color: rgb(84, 214, 138);
+.card-text {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555; /* 텍스트 색상 */
+}
+
+.button-group {
+  display: flex;
+  justify-content: center; /* 버튼을 중앙 정렬 */
+  gap: 10px; /* 버튼 간의 간격 */
+  margin-top: 10px;
+}
+
+.button-group .btn {
+  width: 80px; /* 버튼 크기 통일 */
 }
 
 .addImg {
-  width: 200px; /* 고정된 너비 */
-  height: 150px; /* 고정된 높이 */
-  background-color: lightgray;
-  border-radius: 20px;
+  width: 200px;
+  height: 150px;
+  background-color: #e9ecef; /* 연한 회색 배경 */
+  border-radius: 10px;
   overflow: hidden;
-  margin: 0px 10px 10px 0px;
+  margin: 10px auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,9 +82,63 @@ button.btn-primary {
 }
 
 .addImg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* 이미지가 컨테이너를 채우도록 조정 */ 
-  align-items: center;
-  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* 이미지를 비율 유지 */
+}
+
+.form-control,
+.form-select {
+  max-width: 400px;
+  margin: 10px auto;
+  padding: 8px 10px;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+
+.btn-primary {
+  background-color: rgb(84, 214, 138);
+  border-color: rgb(84, 214, 138);
+}
+
+.btn-primary:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+#pet-form {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-muted {
+  font-size: 14px;
+  color: #6c757d;
 }

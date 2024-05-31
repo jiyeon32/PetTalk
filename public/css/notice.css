@@ -54,3 +54,7 @@ ul.number li a {
     text-align: center;
 }
 
+.btn-success {
+    background-color: rgb(84, 214, 138);
+    border-color: rgb(84, 214, 138);
+}

@@ -2,6 +2,7 @@
 <html lang="ko">
 
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -110,3 +111,103 @@
 </html>
 
 
+=======
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>반려동물 커뮤니티</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/notice.css">
+  <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+
+<!-- 공통 헤더 포함 -->
+<%- include('../header') %>
+
+
+  <!-- 카테고리 버튼 -->
+  <div class="container my-4">
+    <div class="btn-group w-100" role="group" aria-label="게시판 카테고리">
+      <a class="btn btn-outline-dark" href="/posts?category=all">전체게시판</a>
+      <a class="btn btn-outline-primary" href="/posts?category=tmiboard">자유게시판</a>
+      <a class="btn btn-outline-secondary" href="/posts?category=infoboard">정보게시판</a>
+      <a class="btn btn-outline-success" href="/posts?category=sharboard">리뷰게시판</a>
+      <a class="btn btn-outline-danger" href="/posts?category=quesboard">질문게시판</a>
+    </div>
+  </div>
+
+  <!-- 게시글 목록 -->
+  <div class="container">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>번호</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>카테고리</th>
+          <th>작성일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (posts && posts.length > 0) { %>
+          <% posts.forEach((post, index) => { %>
+            <tr>
+              <td><%= (currentPage - 1) * 10 + (index + 1) %></td>
+              <td><a href="/posts/<%= post._id %>" class="text-decoration-none"><%= post.title %></a></td>
+              <td><%= post.author ? post.author.username : '알 수 없음' %></td>
+              <td><%= post.category %></td>
+              <td><%= new Date(post.createdAt).toLocaleDateString() %></td>
+            </tr>
+          <% }); %>
+        <% } else { %>
+          <tr>
+            <td colspan="5" class="text-center text-muted">게시글이 없습니다.</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 글쓰기 버튼 -->
+  <div class="container text-end my-4">
+    <a href="/new" class="btn btn-success">글쓰기</a>
+  </div>
+
+  <!-- 페이지네이션 -->
+  <nav aria-label="페이지네이션">
+    <ul class="pagination justify-content-center">
+      <% if (currentPage > 1) { %>
+        <li class="page-item">
+          <a class="page-link" href="?page=<%= currentPage - 1 %>&category=<%= category || 'all' %>">&laquo;</a>
+        </li>
+      <% } else { %>
+        <li class="page-item disabled">
+          <span class="page-link">&laquo;</span>
+        </li>
+      <% } %>
+
+      <% for (let i = 1; i <= totalPages; i++) { %>
+        <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+          <a class="page-link" href="?page=<%= i %>&category=<%= category || 'all' %>"><%= i %></a>
+        </li>
+      <% } %>
+
+      <% if (currentPage < totalPages) { %>
+        <li class="page-item">
+          <a class="page-link" href="?page=<%= currentPage + 1 %>&category=<%= category || 'all' %>">&raquo;</a>
+        </li>
+      <% } else { %>
+        <li class="page-item disabled">
+          <span class="page-link">&raquo;</span>
+        </li>
+      <% } %>
+    </ul>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+>>>>>>> 4f0fc6b (final)

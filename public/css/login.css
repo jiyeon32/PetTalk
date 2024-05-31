@@ -1,22 +1,51 @@
 html {
-    overflow-x: hidden; /* 수평 스크롤을 숨김 */
+    overflow-x: hidden; /* 수평 스크롤 숨김 */
 }
 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Source Sans Pro', sans-serif; /* 폰트 설정 */
-    font-size: 23px; /* 기본 글자 크기 설정 */
-    line-height: 2em; /* 줄 간격 설정 */
-    overflow-x: hidden; /* 수평 스크롤을 숨김 */
+    font-size: 16px; /* 기본 글자 크기 설정 */
+    background-color: #f8f9fa; /* 배경색 설정 */
 }
 
-h2 {
-    margin-top: 40px;
-    margin-bottom: 40px;
+.container {
+    max-width: 400px;
+    margin: 50px auto;
 }
 
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 카드 그림자 효과 */
+}
 
-.form-control{
+.card-header {
+    background-color: rgb(84, 214, 138); /* 헤더 배경색 */
+    color: white; /* 텍스트 색상 */
+    text-align: center;
+    font-weight: bold;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0; /* 상단 모서리 둥글게 */
+}
+
+.form-label {
+    font-weight: bold;
+    color: #333; /* 레이블 텍스트 색상 */
+}
+
+.form-control {
     margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.btn-success {
+    background-color: rgb(84, 214, 138); /* 버튼 배경색 */
+    border: none;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838; /* 버튼 호버 색상 */
 }
