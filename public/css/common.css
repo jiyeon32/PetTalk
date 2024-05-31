@@ -1,0 +1,48 @@
+/* 공통 상단바 스타일 */
+.navbar {
+    background-color: rgb(84, 214, 138); /* 상단바 배경 색상 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+}
+
+.navbar .nav-link .nav-link active {
+    color: white; /* 링크 글자 색상 */
+    font-weight: bold; /* 글자 굵기 */
+    margin-right: 15px; /* 링크 간 간격 */
+}
+
+.navbar .nav-link:hover {
+    color: #ddd; /* 링크 호버 시 색상 */
+}
+
+.navbar-brand {
+    color: white; /* 로고 글자 색상 */
+    font-size: 1.5rem; /* 로고 크기 */
+    font-weight: bold;
+}
+
+.navbar-brand:hover {
+    color: #ddd; /* 로고 호버 시 색상 */
+}
+
+.navbar-toggler {
+    border-color: white;
+}
+
+.navbar-toggler-icon {
+    background-color: white;
+}
+
+.navbar-text {
+    color: rgb(0, 0, 0);
+    margin-right: 12px;
+}
+
+.btn-outline-danger, .btn-outline-primary, .btn-outline-secondary {
+    color: rgb(214, 84, 84);
+    border-color:rgb(214, 84, 84);
+}
+
+.btn-outline-danger:hover, .btn-outline-primary:hover, .btn-outline-secondary:hover {
+    background-color: rgb(214, 84, 84);
+    color: white;
+}

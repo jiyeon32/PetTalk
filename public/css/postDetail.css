@@ -1,0 +1,131 @@
+html {
+    overflow-x: hidden;
+  }
+  
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    background-color: #f8f9fa;
+  }
+
+/* 전체 컨테이너 설정 */
+.container {
+    max-width: 1200px; /* 페이지의 최대 너비 설정 */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.container-fluid{
+    background-color: rgb(84, 214, 138);
+}
+
+/* 로그아웃 버튼 스타일 */
+.header-menu .logout-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+
+/* 본문 내용과 댓글을 각각 세로로 배치 */
+.content-section, .comment-section {
+    width: 100%; /* 전체 폭을 차지 */
+    max-width: 1200px; /* 최대 너비 설정 */
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 본문 스타일 */
+h1, h2, h3 {
+    color: #333;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.post-meta {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* 글 내용 스타일 */
+p {
+    font-size: 16px;
+    color: #555;
+    margin: 10px 0;
+}
+
+/* 구분선 스타일 */
+hr {
+    border: 1px solid #ddd;
+    margin: 15px 0;
+}
+
+/* 댓글 목록 스타일 */
+ul.list-group {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.list-group-item {
+    margin-bottom: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 댓글 입력 섹션 */
+textarea {
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    margin-top: 15px;
+    box-sizing: border-box;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}
+
+/* 작은 크기의 버튼 스타일링 (수정, 삭제, 댓글 달기) */
+.small-button {
+    font-size: 12px;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    display: inline-block;
+
+}
+
+.btn-warning, .btn-danger {
+    margin-right: 10px;
+}
+
+/* 댓글과 본문 사이의 구분선 */
+.aligned-content hr {
+    border: 1px solid #ddd;
+    margin: 20px 0;
+}
+
