@@ -87,16 +87,6 @@
 
   <script>
     function loadFile(event) {
-<<<<<<< HEAD
-      var image = document.getElementById('img-show');
-      image.innerHTML = ''; // 기존 이미지 제거
-      var imgElement = document.createElement('img');
-      imgElement.src = URL.createObjectURL(event.target.files[0]);
-      imgElement.style.width = '100%'; // 이미지 너비를 컨테이너에 맞추기
-      imgElement.style.height = '100%'; // 이미지 높이를 컨테이너에 맞추기
-      imgElement.style.objectFit = 'cover'; // 이미지 자르기
-      image.appendChild(imgElement);
-=======
       const output = document.getElementById('output');
       output.src = URL.createObjectURL(event.target.files[0]);
       output.style.display = 'block';
@@ -110,16 +100,10 @@
     function cancelEdit() {
       document.getElementById('pet-info').style.display = 'block';
       document.getElementById('pet-form').style.display = 'none';
->>>>>>> 4f0fc6b (final)
     }
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<<<<<<< HEAD
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-=======
->>>>>>> 4f0fc6b (final)
 </body>
 
 </html>
