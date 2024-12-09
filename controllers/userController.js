@@ -1,9 +1,8 @@
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs"); // bcrypt -> bcryptjs로 변경
 const Post = require("../models/Post");
 const Pet = require("../models/Pet");
 const Comment = require("../models/Comment");
-
 
 // 회원가입 처리 로직
 exports.registerUser = async (req, res) => {
@@ -95,7 +94,6 @@ exports.deleteUser = async (req, res) => {
     res.status(500).send("사용자 삭제 중 오류 발생");
   }
 };
-
 
 // 닉네임 및 비밀번호 수정
 exports.updateUser = async (req, res) => {
