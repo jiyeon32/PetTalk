@@ -12,94 +12,136 @@
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/mypet.css">
 </head>
-<body>
 
-<!-- 공통 헤더 포함 -->
-<%- include('../header') %>
-  
+<body>
+  <!-- 공통 헤더 포함 -->
+  <%- include('../header') %>
+
   <header class="text-center my-4">
     <h2>반려동물 관리</h2>
   </header>
 
   <!-- 반려동물 정보 -->
   <div class="container">
-    <% if (pets && pets.length > 0) { %>
-      <div id="pet-info">
-        <% pets.forEach(pet => { %>
-          <div class="card mb-4">
-            <% if (pet.photo) { %>
-              <img src="<%= pet.photo %>" class="card-img-top" alt="<%= pet.name %> 사진">
-            <% } else { %>
-              <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">사진 없음</div>
-            <% } %>
-            <div class="card-body">
-              <h5 class="card-title text-center"><%= pet.name %></h5>
-              <p class="card-text">성별: <%= pet.gender === 'Male' ? '남' : '여' %></p>
-              <p class="card-text">몸무게: 
-                <% if (pet.weight && pet.weight.length > 0) { %>
-                  <%= pet.weight[pet.weight.length - 1].value %> kg
-                <% } else { %>
-                  정보 없음
-                <% } %>
-              </p>
-              <p class="card-text">질환: <%= pet.diseases || '없음' %></p>
-              <p class="card-text">나이: <%= pet.age || '정보 없음' %> 세</p>
-              <div class="button-group">
-                <button class="btn btn-primary btn-sm" onclick="editPet()">수정</button>
-                <form action="/mypet/<%= pet._id %>?_method=DELETE" method="POST">
-                  <button class="btn btn-danger btn-sm" type="submit">삭제</button>
-                </form>
+    <div class="row">
+      <% for (let i = 0; i < 3; i++) { %>
+        <div class="col-md-4 mb-4">
+          <% if (pets[i]) { %>
+            <!-- 반려동물 카드 -->
+            <div class="card">
+              <% if (pets[i].photo) { %>
+                <img src="<%= pets[i].photo %>" class="card-img-top" alt="<%= pets[i].name %> 사진">
+              <% } else { %>
+                <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">사진 없음</div>
+              <% } %>
+              <div class="card-body">
+                <h5 class="card-title text-center"><%= pets[i].name %></h5>
+                <p class="card-text">성별: <%= pets[i].gender === 'Male' ? '남' : '여' %></p>
+                <p class="card-text">몸무게: <%= pets[i].weight[pets[i].weight.length - 1]?.value %> kg</p>
+                <p class="card-text">나이: <%= pets[i].age %> 세</p>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-primary btn-sm" onclick="editPet('<%= pets[i]._id %>')">수정</button>
+                  <form action="/mypet/<%= pets[i]._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger btn-sm" type="submit">삭제</button>
+                  </form>
+                </div>
               </div>
             </div>
-          </div>
-        <% }) %>
-      </div>
-    <% } else { %>
-      <p class="text-center text-muted">등록된 반려동물이 없습니다. 아래 폼을 통해 등록해주세요.</p>
-    <% } %>
+          <% } else { %>
+            <!-- 등록 버튼 -->
+            <div class="card text-center" onclick="showPetForm()" style="cursor: pointer;">
+              <div class="card-body">
+                <h5 class="text-success">등록</h5>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
   </div>
 
   <!-- 반려동물 등록/수정 입력창 -->
-  <div class="container mt-4" id="pet-form" style="<% if (pets && pets.length > 0) { %>display: none;<% } %>">
-    <form action="<% if (pets && pets.length > 0) { %>/mypet/<%= pets[0]._id %>?_method=PUT<% } else { %>/mypet<% } %>" method="POST" enctype="multipart/form-data">
-      <div class="mb-3">
-        <label for="photo" class="form-label">사진 업로드</label>
-        <input type="file" name="photo" class="form-control" accept="image/*" onchange="loadFile(event)">
-        <div class="addImg">
-          <img id="output" width="200" height="150" style="object-fit: cover; display: none;">
-        </div>
+  <div id="pet-form" class="modal" tabindex="-1" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="petForm" method="POST" enctype="multipart/form-data">
+          <div class="modal-header">
+            <h5 class="modal-title">반려동물 등록/수정</h5>
+            <button type="button" class="btn-close" onclick="hidePetForm()"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="photo" class="form-label">사진 업로드</label>
+              <input type="file" name="photo" class="form-control" accept="image/*" onchange="previewImage(event)">
+              <div class="mt-2">
+                <img id="preview" src="" alt="미리보기" style="display: none; max-width: 100%;">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">이름</label>
+              <input type="text" name="name" class="form-control" placeholder="이름" required>
+            </div>
+            <div class="mb-3">
+              <label for="gender" class="form-label">성별</label>
+              <select name="gender" class="form-select" required>
+                <option value="Male">남</option>
+                <option value="Female">여</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="weight" class="form-label">몸무게</label>
+              <input type="number" name="weight" class="form-control" placeholder="몸무게 (kg)" required>
+            </div>
+            <div class="mb-3">
+              <label for="age" class="form-label">나이</label>
+              <input type="number" name="age" class="form-control" placeholder="나이 (세)" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">저장</button>
+            <button type="button" class="btn btn-secondary" onclick="hidePetForm()">취소</button>
+          </div>
+        </form>
       </div>
-
-      <input type="text" name="name" placeholder="이름" value="<%= pets && pets.length > 0 ? pets[0].name : '' %>" required>
-      <select name="gender" required>
-        <option value="Male" <% if (pets && pets.length > 0 && pets[0].gender === 'Male') { %>selected<% } %>>남자</option>
-        <option value="Female" <% if (pets && pets.length > 0 && pets[0].gender === 'Female') { %>selected<% } %>>여자</option>
-      </select>
-      <input type="number" name="weight" placeholder="몸무게 (kg)" value="<%= pets && pets.length > 0 ? pets[0].weight[0]?.value : '' %>" required>
-      <input type="text" name="diseases" placeholder="질환" value="<%= pets && pets.length > 0 ? pets[0].diseases : '' %>">
-      <input type="number" name="age" placeholder="나이 (세)" value="<%= pets && pets.length > 0 ? pets[0].age : '' %>" required>
-      <button type="submit" class="btn btn-success"><% if (pets && pets.length > 0) { %>저장하기<% } else { %>등록하기<% } %></button>
-      <% if (pets && pets.length > 0) { %>
-        <button type="button" class="btn btn-secondary" onclick="cancelEdit()">취소</button>
-      <% } %>
-    </form>
+    </div>
   </div>
 
   <script>
-    function loadFile(event) {
-      const output = document.getElementById('output');
-      output.src = URL.createObjectURL(event.target.files[0]);
-      output.style.display = 'block';
+    function showPetForm() {
+      const form = document.getElementById("petForm");
+      form.reset();
+      form.setAttribute("action", "/mypet");
+      document.getElementById("preview").style.display = "none";
+      document.getElementById("pet-form").style.display = "block";
     }
 
-    function editPet() {
-      document.getElementById('pet-info').style.display = 'none';
-      document.getElementById('pet-form').style.display = 'block';
+    function hidePetForm() {
+      document.getElementById("pet-form").style.display = "none";
     }
 
-    function cancelEdit() {
-      document.getElementById('pet-info').style.display = 'block';
-      document.getElementById('pet-form').style.display = 'none';
+    function previewImage(event) {
+      const preview = document.getElementById("preview");
+      preview.src = URL.createObjectURL(event.target.files[0]);
+      preview.style.display = "block";
+    }
+
+    function editPet(petId) {
+      const pet = <%- JSON.stringify(pets) %>.find(p => p._id === petId);
+      if (!pet) {
+        alert("선택한 반려동물을 찾을 수 없습니다.");
+        return;
+      }
+
+      const form = document.getElementById("petForm");
+      form.setAttribute("action", `/mypet/${petId}?_method=PUT`);
+
+      form.querySelector("input[name='name']").value = pet.name || "";
+      form.querySelector("select[name='gender']").value = pet.gender || "Male";
+      form.querySelector("input[name='weight']").value = pet.weight?.[pet.weight.length - 1]?.value || "";
+      form.querySelector("input[name='age']").value = pet.age || "";
+
+      document.getElementById("preview").style.display = "none";
+      document.getElementById("pet-form").style.display = "block";
     }
   </script>
 

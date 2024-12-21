@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const postSchema = new mongoose.Schema({
   title: { type: String, required: true }, // 제목
   category: { type: String, required: true }, // 카테고리
+  tag: { type: String, required: true },  //말머리
   content: { type: String, required: true }, // 내용
   image: { type: String },
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // 작성자 (참조)
