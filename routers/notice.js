@@ -62,12 +62,13 @@ router.get('/new', (req, res) => {
 // 게시글 작성 요청 처리
 router.post('/posts/new', upload.single('image'), async (req, res) => {
   try {
-    const { title, content, category } = req.body;
+    const { title, content,tag, category } = req.body;
 
     const postData = {
       title,
       content,
       category,
+      tag,
       author: req.session.userId,
     };
 
@@ -103,10 +104,10 @@ router.get('/posts/:postId/edit', async (req, res) => {
 //게시글 수정
 router.put('/posts/:id', upload.single('image'), async (req, res) => {
   try {
-    const { title, content, category } = req.body;
+    const { title, content, category,tag } = req.body;
 
     // 업데이트 데이터 생성
-    const updatedData = { title, content, category };
+    const updatedData = { title, content, category,tag };
 
     if (req.file) {
       // 새 파일 업로드 처리

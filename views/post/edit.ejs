@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/edit.css">
     <link rel="stylesheet" href="css/common.css">
-  </head>
-  <body>
-  
-  <!-- 공통 헤더 포함 -->
-  <%- include('../header') %>
+</head>
+<body>
+
+<!-- 공통 헤더 포함 -->
+<%- include('../header') %>
 
 <!-- 수정 페이지 -->
 <div class="container mt-5">
@@ -29,7 +29,7 @@
         </div>
         <div class="mb-3">
           <label for="category" class="form-label">카테고리</label>
-          <select id="category" name="category" class="form-select" required>
+          <select id="category" name="category" class="form-select" required onchange="updateTags()">
             <option value="" disabled>카테고리를 선택하세요</option>
             <option value="자유게시판" <%= post.category === "자유게시판" ? "selected" : "" %>>자유게시판</option>
             <option value="정보게시판" <%= post.category === "정보게시판" ? "selected" : "" %>>정보게시판</option>
@@ -37,6 +37,14 @@
             <option value="질문게시판" <%= post.category === "질문게시판" ? "selected" : "" %>>질문게시판</option>
           </select>
         </div>
+
+        <div class="mb-3">
+          <label for="tag" class="form-label">말머리</label>
+          <select id="tag" name="tag" class="form-select" required>
+                <!-- JavaScript로 동적으로 옵션 변경 -->
+          </select>
+        </div>   
+
         <div class="mb-3">
           <label for="content" class="form-label">내용</label>
           <textarea id="content" name="content" class="form-control" rows="6" required><%= post.content %></textarea>
@@ -59,6 +67,40 @@
   </div>
 </div>
 
+<script>
+  function updateTags() {
+      const category = document.getElementById('category').value;
+      const tagSelect = document.getElementById('tag');
+      tagSelect.innerHTML = "";
+  
+      const tags = {
+          "자유게시판": ["귀여운 순간", "소중한 일상"],
+          "정보게시판": ["건강관리", "훈련", "먹이 추천", "용품"],
+          "리뷰게시판": ["동물병원", "숙소", "용품", "사료"],
+          "질문게시판": ["건강 고민", "행동 문제", "기타 질문"]
+      };
+  
+      if (tags[category]) {
+          tags[category].forEach(tag => {
+              const option = document.createElement('option');
+              option.value = tag;
+              option.textContent = tag;
+              tagSelect.appendChild(option);
+          });
+
+          // 기존 선택된 말머리 유지
+          const currentTag = "<%= post.tag %>";
+          [...tagSelect.options].forEach(option => {
+              if (option.value === currentTag) option.selected = true;
+          });
+      }
+  }
+
+  // 페이지 로드 시 초기화
+  document.addEventListener("DOMContentLoaded", () => {
+      updateTags();
+  });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

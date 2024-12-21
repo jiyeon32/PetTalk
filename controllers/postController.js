@@ -39,15 +39,16 @@ exports.getPosts = async (req, res) => {
   }
 };
 
-// 게시글 저장 로직
+// 게시글 등록 로직
 exports.createPost = async (req, res) => {
   try {
-    const { title, content, category } = req.body;
+    const { title, content, category,tag } = req.body;
 
     const newPost = new Post({
       title,
       category,
       content,
+      tag,
       author: req.session.userId,
     });
 
@@ -104,9 +105,9 @@ exports.deletePost = async (req, res) => {
 exports.updatePost = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, content, category } = req.body;
+    const { title, content, category,tag } = req.body;
 
-    await Post.findByIdAndUpdate(id, { title, content, category });
+    await Post.findByIdAndUpdate(id, { title, content, category,tag });
     res.redirect(`/posts/${id}`);
   } catch (error) {
     console.error(error);

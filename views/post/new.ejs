@@ -37,12 +37,20 @@
                         </select>
 
                         <p id="review-category-note" class="text-muted mt-2" style="display: none;">영수증/결제 사진을 첨부해주세요.</p>
-
                     </div>
+
+                    <div class="mb-3">
+                        <label for="tag" class="form-label">말머리</label>
+                        <select id="tag" name="tag" class="form-select" required>
+                              <!-- JavaScript로 동적으로 옵션 변경 -->
+                        </select>
+                    </div>   
+                    
                     <div class="mb-3">
                         <label for="content" class="form-label">내용</label>
                         <textarea id="content" name="content" class="form-control" rows="6" placeholder="내용을 입력하세요" required></textarea>
                     </div>
+
                     <div class="mb-3">
                         <label for="image" class="form-label">이미지 첨부</label>
                         <input type="file" id="image" name="image" class="form-control" accept="image/*">
@@ -55,19 +63,47 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function handleCategoryChange() {
-            const category = document.getElementById('category').value;
-            const note = document.getElementById('review-category-note');
-            if (category === '리뷰게시판') {
-                note.style.display = 'block';
-            } else {
-                note.style.display = 'none';
-            }
+<script>
+    function handleCategoryChange() {
+        const category = document.getElementById('category').value;
+        const note = document.getElementById('review-category-note');
+    
+        if (category === '리뷰게시판') {
+            note.style.display = 'block';
+        } else {
+            note.style.display = 'none';
         }
-    </script>
+    
+        // 여기서 updateTags 호출
+        updateTags();
+    }
+    
+    function updateTags() {
+        const category = document.getElementById('category').value;
+        const tagSelect = document.getElementById('tag');
+        tagSelect.innerHTML = "";
+    
+        const tags = {
+            "자유게시판": ["귀여운 순간", "소중한 일상"],
+            "정보게시판": ["건강관리", "훈련", "먹이 추천", "용품"],
+            "리뷰게시판": ["동물병원", "숙소", "용품", "사료"],
+            "질문게시판": ["건강 고민", "행동 문제", "기타 질문"]
+        };
+    
+        if (tags[category]) {
+            tags[category].forEach(tag => {
+                const option = document.createElement('option');
+                option.value = tag;
+                option.textContent = tag;
+                tagSelect.appendChild(option);
+            });
+        }
+    }
+    
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</script>
+    
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
