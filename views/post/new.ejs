@@ -28,13 +28,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="category" class="form-label">카테고리</label>
-                        <select id="category" name="category" class="form-select" required>
+                        <select id="category" name="category" class="form-select" required onchange="handleCategoryChange()">
                             <option value="" disabled selected>카테고리를 선택하세요</option>
                             <option value="자유게시판">자유게시판</option>
                             <option value="정보게시판">정보게시판</option>
                             <option value="리뷰게시판">리뷰게시판</option>
                             <option value="질문게시판">질문게시판</option>
                         </select>
+
+                        <p id="review-category-note" class="text-muted mt-2" style="display: none;">영수증/결제 사진을 첨부해주세요.</p>
+
                     </div>
                     <div class="mb-3">
                         <label for="content" class="form-label">내용</label>
@@ -52,6 +55,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function handleCategoryChange() {
+            const category = document.getElementById('category').value;
+            const note = document.getElementById('review-category-note');
+            if (category === '리뷰게시판') {
+                note.style.display = 'block';
+            } else {
+                note.style.display = 'none';
+            }
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
