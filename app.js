@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 const userRouter = require('./routers/user.js');
 const mypageRouter = require('./routers/mypage.js');
 const mypetRouter = require('./routers/mypet.js');
-const clinicRouter = require('./routers/clinic.js');
+const mygroupRouter = require('./routers/mygroup.js');
 const noticeRouter = require('./routers/notice.js');
 
 const Post = require('./models/Post');
@@ -78,11 +78,18 @@ app.get('/', async (req, res) => {
   }
 });
 
+// 세션 데이터를 res.locals에 전달
+app.use((req, res, next) => {
+  res.locals.userId = req.session.userId || null;
+  res.locals.nickname = req.session.nickname || null;
+  next();
+});
+
 // 라우터 설정
 app.use('/', userRouter);
 app.use('/', mypageRouter);
 app.use('/', mypetRouter);
-app.use('/', clinicRouter);
+app.use('/', mygroupRouter);
 app.use('/', noticeRouter);
 app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));
 
