@@ -6,7 +6,7 @@ const Group = require('../models/Group');
 router.get('/group', async (req, res) => {
   try {
     const groups = await Group.find(); // MongoDB에서 그룹 데이터 가져오기
-    res.render('group', { groups }); // EJS에 그룹 데이터 전달
+    res.render('groups/group', { groups }); // EJS에 그룹 데이터 전달
   } catch (error) {
     console.error('그룹 목록 조회 오류:', error.message);
     res.status(500).send('서버 오류로 그룹 데이터를 가져올 수 없습니다.');

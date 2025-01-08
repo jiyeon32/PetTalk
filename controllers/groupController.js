@@ -4,7 +4,7 @@ const Group = require('../models/Group');
 exports.getAllGroups = async (req, res) => {
     try {
         const groups = await Group.find(); // MongoDB에서 그룹 데이터 가져오기
-        res.render('/group', { 
+        res.render('groups/group', { 
             groups, 
             userId: req.session.userId || null, // 세션에서 userId 가져오기
             nickname: req.session.nickname || null // 세션에서 nickname 가져오기
@@ -36,7 +36,7 @@ exports.createGroup = async (req, res) => {
         res.status(201).json({ success: true, data: group });
     } catch (error) {
         console.error('그룹 생성 오류:', error.message);
-        res.redirect('/group');
+        res.redirect('groups/group');
     }
 };
 
