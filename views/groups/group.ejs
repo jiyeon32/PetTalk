@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <!-- 공통 헤더 포함 -->
+  <!-- 공통 헤더d -->
   <%- include('../header') %>
 
   <div class="group-header my-4">
@@ -55,7 +55,10 @@
       <% if (groups && groups.length > 0) { %>
         <% groups.forEach((group, index) => { %>
           <li class="list-group-item">
-            <strong><%= group.name %></strong> (<%= group.region %>)<br>
+            <a href="/group/<%= group._id %>">
+            <strong><%= group.name %></strong> 
+          </a>
+           (<%= group.region %>)<br>
             <%= group.description %>
           </li>
         <% }); %>
