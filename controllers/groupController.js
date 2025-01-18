@@ -47,16 +47,19 @@ exports.getGroupById = async (req, res) => {
             return res.status(400).json({ message: '유효하지 않은 그룹 ID입니다.' });
         }
 
-        const group = await Group.findById(req.params.id);
+        const group = await Group.findById(req.params.id).populate('members.userId', 'nickname');
         if (!group) {
             return res.status(404).json({ message: '그룹을 찾을 수 없습니다.' });
         }
-        res.status(200).json({ success: true, data: group });
+
+        const userId = req.session.userId; // 세션에서 userId 가져오기
+        res.render('groups/groupDetail', { group, userId });
     } catch (error) {
         console.error('그룹 조회 오류:', error.message);
         res.status(500).json({ message: '서버 오류로 그룹을 불러올 수 없습니다.' });
     }
 };
+
 
 // 그룹 삭제
 exports.deleteGroup = async (req, res) => {
@@ -94,3 +97,26 @@ exports.addMemberToGroup = async (req, res) => {
         res.status(500).json({ message: '서버 오류로 멤버를 추가할 수 없습니다.' });
     }
 };
+
+// 그룹 탈퇴 처리
+router.post('/group/:id/leave', async (req, res) => {
+    try {
+        const { userId } = req.body;  // 클라이언트에서 보내는 userId 받기
+        const group = await Group.findById(req.params.id);
+
+        if (!group) {
+            return res.status(404).json({ message: '그룹을 찾을 수 없습니다.' });
+        }
+
+        // 그룹에서 해당 사용자 제거
+        group.members = group.members.filter(member => member.userId.toString() !== userId);
+
+        await group.save();
+        
+        // 성공적으로 탈퇴 처리된 후 클라이언트에 응답
+        res.status(200).json({ message: '그룹에서 탈퇴되었습니다.' });
+    } catch (error) {
+        console.error('그룹 탈퇴 오류:', error.message);
+        res.status(500).json({ message: '서버 오류로 그룹에서 탈퇴할 수 없습니다.' });
+    }
+});

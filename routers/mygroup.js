@@ -38,7 +38,12 @@ router.get('/group/:id', async (req, res) => {
     if (!group) {
       return res.status(404).send('그룹을 찾을 수 없습니다.');
     }
-    res.render('groups/groupDetail', { group });
+
+    // 세션에서 userId 가져오기
+    const userId = req.session.userId;
+
+    // 그룹 상세 페이지 렌더링 시 group과 userId를 함께 전달
+    res.render('groups/groupDetail', { group, userId });
   } catch (error) {
     console.error('그룹 상세 조회 오류:', error.message);
     res.status(500).send('서버 오류로 그룹 데이터를 가져올 수 없습니다.');
@@ -69,6 +74,35 @@ router.post('/group/:id/join', async (req, res) => {
   } catch (error) {
     console.error('그룹 가입 오류:', error.message);
     res.status(500).send('서버 오류로 그룹 가입을 처리할 수 없습니다.');
+  }
+});
+
+// 그룹 탈퇴 처리
+router.post('/group/:id/leave', async (req, res) => {
+  try {
+    const group = await Group.findById(req.params.id);
+    if (!group) {
+      return res.status(404).send('그룹을 찾을 수 없습니다.');
+    }
+
+    const userId = req.session.userId; // 세션에서 사용자 ID 가져오기
+    if (!userId) {
+      return res.status(401).send('로그인이 필요합니다.');
+    }
+
+    // 사용자 삭제 처리
+    const memberIndex = group.members.findIndex(member => member.userId.toString() === userId);
+    if (memberIndex === -1) {
+      return res.status(400).send('그룹에 가입되지 않은 사용자입니다.');
+    }
+
+    group.members.splice(memberIndex, 1); // 해당 멤버 삭제
+    await group.save();
+
+    res.redirect(`/group/${group._id}`); // 탈퇴 후 그룹 상세 페이지로 리다이렉트
+  } catch (error) {
+    console.error('그룹 탈퇴 오류:', error.message);
+    res.status(500).send('서버 오류로 그룹 탈퇴를 처리할 수 없습니다.');
   }
 });
 
