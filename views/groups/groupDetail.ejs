@@ -65,6 +65,13 @@
 <!-- 일정 추가 폼 (관리자 전용) -->
 <% if (isAdmin) { %>
   <div class="my-4">
+    <!-- 일정 추가 버튼 -->
+    <div class="text-center">
+      <button id="schedule-add-btn" class="btn btn-primary">일정 추가</button>
+    </div>
+
+    <!-- 일정 추가 폼 (기본적으로 숨김 상태) -->
+    <div id="schedule-add-form" style="display: none;" class="my-4">
     <h4>일정 추가</h4>
     <form action="/group/<%= group._id %>/schedules" method="POST">
       <div class="mb-3">
@@ -135,7 +142,20 @@
     <% } %>
     
 
+
+
   <script>
+
+
+  // 일정 추가 버튼 클릭 시 일정 추가 폼 토글
+  document.getElementById('schedule-add-btn')?.addEventListener('click', function () {
+    const scheduleAddForm = document.getElementById('schedule-add-form');
+    if (scheduleAddForm.style.display === 'none' || scheduleAddForm.style.display === '') {
+      scheduleAddForm.style.display = 'block'; // 폼 표시
+    } else {
+      scheduleAddForm.style.display = 'none'; // 폼 숨김
+    }
+  });
     // 수정 버튼 클릭 시 수정 폼 토글
     document.getElementById('edit-btn')?.addEventListener('click', function() {
       const editForm = document.getElementById('edit-form');
