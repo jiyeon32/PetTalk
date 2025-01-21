@@ -40,29 +40,70 @@
       </ul>
     </div>
 
-    <!-- 모임 일정 -->
-    <div class="my-4">
-      <h4>모임 일정</h4>
-      <p class="text-muted">모임 일정은 추후 업데이트 예정입니다.</p>
-    </div>
+<!-- 모임 일정 -->
+<div class="my-4">
+  <h4>모임 일정</h4>
+  <% if (group.schedules.length > 0) { %>
+    <ul class="list-group">
+      <% group.schedules.forEach(schedule => { %>
+        <li class="list-group-item">
+          <strong><%= schedule.title %></strong> - <%= schedule.date.toLocaleDateString() %>
+          <p><%= schedule.description %></p>
+          <% if (isAdmin) { %>
+            <form action="/group/<%= group._id %>/schedules/<%= schedule._id %>/delete" method="POST">
+              <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+            </form>
+          <% } %>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p class="text-muted">등록된 일정이 없습니다.</p>
+  <% } %>
+</div>
 
-    <!-- 가입 신청 버튼 -->
-    <% if (userId && group.members) { %>
-      <% if (!group.members.some(member => String(member.userId._id) === String(userId))) { %>
-        <div class="text-center">
-          <form action="/group/<%= group._id %>/join" method="POST">
-            <button type="submit" class="btn btn-primary">그룹 가입 신청</button>
-          </form>
-        </div>
-      <% } else { %>
-        <!-- 그룹 탈퇴 버튼 (가입되어 있는 경우) -->
-        <div class="text-center mt-4">
-          <form id="leave-form" method="POST" action="/group/<%= group._id %>/leave">
-            <button type="button" class="btn btn-danger" id="leave-btn">그룹 탈퇴</button>
-          </form>
-        </div>
-      <% } %>
-    <% } %>
+<!-- 일정 추가 폼 (관리자 전용) -->
+<% if (isAdmin) { %>
+  <div class="my-4">
+    <h4>일정 추가</h4>
+    <form action="/group/<%= group._id %>/schedules" method="POST">
+      <div class="mb-3">
+        <label for="title" class="form-label">제목</label>
+        <input type="text" class="form-control" id="title" name="title" required>
+      </div>
+      <div class="mb-3">
+        <label for="date" class="form-label">날짜</label>
+        <input type="date" class="form-control" id="date" name="date" required>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">설명</label>
+        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">추가</button>
+    </form>
+  </div>
+<% } %>
+
+
+<!-- 가입 신청 버튼 -->
+<% if (userId && group.members) { %>
+  <% const isMember = group.members.some(member => String(member.userId._id) === String(userId)); %>
+  <% if (!isMember) { %>
+    <!-- 아직 가입하지 않은 경우 -->
+    <div class="text-center">
+      <form action="/group/<%= group._id %>/join" method="POST">
+        <button type="submit" class="btn btn-primary">그룹 가입 신청</button>
+      </form>
+    </div>
+  <% } else { %>
+    <!-- 이미 가입된 경우 탈퇴 버튼 -->
+    <div class="text-center mt-4">
+      <form action="/group/<%= group._id %>/leave" method="POST">
+        <button type="submit" class="btn btn-danger">그룹 탈퇴</button>
+      </form>
+    </div>
+  <% } %>
+<% } %>
 
     <!-- 관리자 전용 수정 섹션 -->
     <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
