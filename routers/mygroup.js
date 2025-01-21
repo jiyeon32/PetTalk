@@ -31,7 +31,7 @@ router.post('/group', async (req, res) => {
   }
 });
 
-// 그룹 상세 페이지
+// 그룹 상세 페이지 (관리자 여부 추가)
 router.get('/group/:id', async (req, res) => {
   try {
     const group = await Group.findById(req.params.id).populate('members.userId', 'nickname');
@@ -39,16 +39,19 @@ router.get('/group/:id', async (req, res) => {
       return res.status(404).send('그룹을 찾을 수 없습니다.');
     }
 
-    // 세션에서 userId 가져오기
-    const userId = req.session.userId;
+    const userId = req.session.userId; // 현재 로그인된 사용자 ID 가져오기
+    const isAdmin = group.members.some(
+      member => String(member.userId._id) === String(userId) && member.role === 'admin' // 관리자인지 확인
+    );
 
-    // 그룹 상세 페이지 렌더링 시 group과 userId를 함께 전달
-    res.render('groups/groupDetail', { group, userId });
+    // groupDetail.ejs에 isAdmin 추가
+    res.render('groups/groupDetail', { group, userId, isAdmin });
   } catch (error) {
     console.error('그룹 상세 조회 오류:', error.message);
     res.status(500).send('서버 오류로 그룹 데이터를 가져올 수 없습니다.');
   }
 });
+
 
 // 그룹 가입 신청
 router.post('/group/:id/join', async (req, res) => {
@@ -105,5 +108,26 @@ router.post('/group/:id/leave', async (req, res) => {
     res.status(500).send('서버 오류로 그룹 탈퇴를 처리할 수 없습니다.');
   }
 });
+
+// 그룹 상세 페이지
+router.get('/group/:id', async (req, res) => {
+  try {
+    const group = await Group.findById(req.params.id).populate('members.userId', 'nickname');
+    if (!group) {
+      return res.status(404).send('그룹을 찾을 수 없습니다.');
+    }
+
+    const userId = req.session.userId;
+
+    // 관리자 여부 확인 (예시: group.admin이 관리자의 userId)
+    const isAdmin = group.admin.toString() === userId; // 관리자의 userId와 현재 로그인된 userId 비교
+
+    res.render('groups/groupDetail', { group, userId, isAdmin }); // isAdmin 추가
+  } catch (error) {
+    console.error('그룹 상세 조회 오류:', error.message);
+    res.status(500).send('서버 오류로 그룹 데이터를 가져올 수 없습니다.');
+  }
+});
+
 
 module.exports = router;
